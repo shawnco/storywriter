@@ -1,0 +1,5 @@
+node_modules
+server/db
+server/config.json
+client/src/actions/config.json
+client/node_modules
