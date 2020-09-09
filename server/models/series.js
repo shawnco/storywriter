@@ -2,7 +2,7 @@ const db = require('./db');
 const options = require('./options');
 const Sequelize = require('sequelize');
 
-module.exports = db.define('series', {
+const model = db.define('series', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,3 +11,7 @@ module.exports = db.define('series', {
     title: Sequelize.STRING,
     description: Sequelize.STRING
 }, options);
+
+console.log('model',model)
+
+module.exports = model;

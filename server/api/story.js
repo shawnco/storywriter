@@ -2,6 +2,7 @@ const Story = require('./../models/story');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
+const send = require('./send');
 
 const list = (req, res, next) => {
     Story.findAll().then(story => {
@@ -51,8 +52,9 @@ const del = (req, res, next) => {
     });
 }
 
-router.get('/api/story/list', list);
-router.get('/api/story/:id', get);
-router.post('/api/story', create);
-router.put('/api/story/:id', update);
-router.delete('/api/story/:id', del);
+router.get('/api/story/list', list, send);
+router.get('/api/story/:id', get, send);
+router.post('/api/story', create, send);
+router.put('/api/story/:id', update, send);
+router.delete('/api/story/:id', del, send);
+module.exports = router;

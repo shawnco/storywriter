@@ -2,6 +2,7 @@ const Series = require('./../models/series');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
+const send = require('./send');
 
 const list = (req, res, next) => {
     Series.findAll().then(series => {
@@ -51,8 +52,9 @@ const del = (req, res, next) => {
     });
 }
 
-router.get('/api/series/list', list);
-router.get('/api/series/:id', get);
-router.post('/api/series', create);
-router.put('/api/series/:id', update);
-router.delete('/api/series/:id', del);
+router.get('/api/series/list', list, send);
+router.get('/api/series/:id', get, send);
+router.post('/api/series', create, send);
+router.put('/api/series/:id', update, send);
+router.delete('/api/series/:id', del, send);
+module.exports = router;
