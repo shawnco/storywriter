@@ -31,6 +31,7 @@ export function getSeries(id) {
 export function createSeries(data) {
     return dispatch => {
         Request.post('series', data).then(res => {
+            console.log('then',res.data)
             dispatch({
                 type: CREATE_SERIES,
                 payload: res.data

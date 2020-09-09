@@ -25,7 +25,7 @@ const create = (req, res, next) => {
         description: _.get(req, 'body.description', '')
     };
     Series.create(data).then(series => {
-        req.reponse = series;
+        req.response = series;
         return next();
     });
 }

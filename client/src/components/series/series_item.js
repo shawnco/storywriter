@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {updateSeries, deleteSeries} from './../../actions/series';
 
 class SeriesItem extends Component {
@@ -34,8 +35,11 @@ class SeriesItem extends Component {
     }
 
     render() {
-        const {title, description} = this.state;
+        const {id, title, description} = this.state;
         return <tr>
+            <td>
+                <Link to={`/series/${id}`}>{id}</Link>
+            </td>
             <td>
                 <input
                     type='text'
@@ -48,7 +52,7 @@ class SeriesItem extends Component {
                 <textarea
                     name='description'
                     value={description}
-                    onChange={this.updateSeries}
+                    onChange={this.updateState}
                 />
             </td>
             <td>

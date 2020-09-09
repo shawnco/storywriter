@@ -29,7 +29,7 @@ export default function(state = initial, action) {
             });
             return {...state, seriesList: editSeries};
         case DELETE_SERIES:
-            const deleteSeries = state.seriesList.filter(series => series.id !== action.payload);
+            const deleteSeries = state.seriesList.filter(series => series.id !== action.payload.id);
             return {...state, seriesList: deleteSeries};
     }
     return state;

@@ -11,9 +11,10 @@ class SeriesTable extends Component {
         const {series} = this.props;
         return <Fragment>
             <h2>Series List</h2>
-            <table>
+            <table border={1}>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Update</th>

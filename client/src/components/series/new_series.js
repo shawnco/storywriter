@@ -28,6 +28,7 @@ class NewSeries extends Component {
     render() {
         const {title, description} = this.state;
         return <tr>
+            <td></td>
             <td>
                 <input
                     type='text'
