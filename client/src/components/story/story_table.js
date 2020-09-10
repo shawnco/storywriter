@@ -1,16 +1,16 @@
 import React, {Component, Fragment} from 'react';
-import SeriesItem from './series_item';
-import NewSeries from './new_series';
+import StoryItem from './story_item';
+import NewStory from './new_story';
 
-class SeriesTable extends Component {
+class StoryTable extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const {series} = this.props;
+        const {stories, series} = this.props;
         return <Fragment>
-            <h2>Series List</h2>
+            <h2>Story List</h2>
             <table border={1}>
                 <thead>
                     <tr>
@@ -22,12 +22,12 @@ class SeriesTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {series.map(s => <SeriesItem key={s.id} series={s} />)}
-                    <NewSeries />
+                    {stories.map(s => <StoryItem key={s.id} story={s} />)}
+                    <NewStory series={series} />
                 </tbody>
             </table>
         </Fragment>
     }
 }
 
-export default SeriesTable;
+export default StoryTable;

@@ -1,4 +1,5 @@
 const Series = require('./../models/series');
+const Story = require('./../models/story');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -14,7 +15,22 @@ const list = (req, res, next) => {
 const get = (req, res, next) => {
     const id = req.params.id;
     Series.findByPk(id).then(series => {
-        req.response = series;
+        req.response = {
+            series: series
+        };
+        return next();
+    });
+}
+
+const stories = (req, res, next) => {
+    const id = req.params.id;
+    const filter = {
+        where: {
+            series: id
+        }
+    };
+    Story.findAll(filter).then(stories => {
+        req.response.stories = stories;
         return next();
     });
 }
@@ -53,7 +69,7 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/series/list', list, send);
-router.get('/api/series/:id', get, send);
+router.get('/api/series/:id', get, stories, send);
 router.post('/api/series', create, send);
 router.put('/api/series/:id', update, send);
 router.delete('/api/series/:id', del, send);

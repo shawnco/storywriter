@@ -28,7 +28,7 @@ const create = (req, res, next) => {
         chapter: _.get(req, 'body.chapter', '')
     };
     Scene.create(data).then(scene => {
-        req.reponse = scene;
+        req.response = scene;
         return next();
     });
 }
