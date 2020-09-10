@@ -37,6 +37,19 @@ class SceneItem extends Component {
         }
     }
 
+    previewContent(content) {
+        while (content.indexOf('<p></p>') > -1) {
+            content = content.replace('<p></p>', '  ');
+        }
+        while (content.indexOf('<p>') > -1) {
+            content = content.replace('<p>', '');
+        }
+        while (content.indexOf('</p>') > -1) {
+            content = content.replace('</p>', '');
+        }
+        return content.substring(0, 250);
+    }
+
     render() {
         const {id, description, content, position} = this.state;
         return <tr>
@@ -52,7 +65,7 @@ class SceneItem extends Component {
                 />
             </td>
             <td>
-                {content}
+                {this.previewContent(content)}
             </td>
             <td>
                 <input
