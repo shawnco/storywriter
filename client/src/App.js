@@ -3,6 +3,7 @@ import {Route, withRouter} from 'react-router-dom';
 import AllSeries from './components/series/all_series';
 import Series from './components/series/series';
 import Story from './components/story/story';
+import Scene from './components/scene/scene';
 
 class App extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
             <Route path='/series' component={AllSeries} exact />
             <Route path='/series/:id' component={Series} exact />
             <Route path='/story/:id' component={Story} exact />
+            <Route path='/scene/:id' component={Scene} exact />
         </div>
     }
 }
