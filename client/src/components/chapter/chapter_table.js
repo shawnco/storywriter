@@ -1,14 +1,14 @@
 import React, {Component, Fragment} from 'react';
-import SceneItem from './scene_item';
-import NewScene from './new_scene';
+import ChapterItem from './chapter_item';
+import NewChapter from './new_chapter';
 
-class SceneTable extends Component {
+class ChapterTable extends Component {
     constructor(props) {
         super(props);
     }
 
-    sortScenes(scenes) {
-        return scenes.sort((a, b) => {
+    sortChapters(chapters) {
+        return chapters.sort((a, b) => {
             if (a.position < b.position) {
                 return -1;
             } else if (a.position > b.position) {
@@ -20,28 +20,27 @@ class SceneTable extends Component {
     }
 
     render() {
-        const {scenes, story} = this.props;
+        const {chapters, scenes, story} = this.props;
         return <Fragment>
-            <h2>Scene List</h2>
+            <h2>Chapter List</h2>
             <table border={1}>
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Title</th>
                         <th>Description</th>
-                        <th>Content (preview)</th>
-                        <th>Chapter</th>
                         <th>Position</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {this.sortScenes(scenes).map(s => <SceneItem key={s.id} scene={s} />)}
-                    <NewScene story={story} />
+                    {this.sortChapters(chapters).map(s => <ChapterItem key={s.id} chapter={s} scenes={scenes} />)}
+                    <NewChapter story={story} />
                 </tbody>
             </table>
         </Fragment>
     }
 }
 
-export default SceneTable;
+export default ChapterTable;

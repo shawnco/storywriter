@@ -51,7 +51,7 @@ class SceneItem extends Component {
     }
 
     render() {
-        const {id, description, content, position} = this.state;
+        const {id, description, content, position, chapter} = this.state;
         return <tr>
             <td>
                 <Link to={`/scene/${id}`}>{id}</Link>
@@ -66,6 +66,14 @@ class SceneItem extends Component {
             </td>
             <td>
                 {this.previewContent(content)}
+            </td>
+            <td>
+                <input
+                    type='text'
+                    name='chapter'
+                    value={chapter}
+                    onChange={this.updateState}
+                />
             </td>
             <td>
                 <input

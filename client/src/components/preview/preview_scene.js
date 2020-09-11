@@ -17,7 +17,6 @@ class PreviewScene extends Component {
     render() {
         const {selected} = this.state;
         const {scenes} = this.props;
-        console.log('WAIT',scenes)
         if (scenes.length == 1) {
             return <span dangerouslySetInnerHTML={{__html: scenes[0].content}} />
         } else {

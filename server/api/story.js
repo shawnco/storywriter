@@ -1,5 +1,6 @@
 const Story = require('./../models/story');
 const Scene = require('./../models/scene');
+const Chapter = require('./../models/chapter');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -32,7 +33,20 @@ const scenes = (req, res, next) => {
     Scene.findAll(filter).then(scenes => {
         req.response.scenes = scenes;
         return next();
-    })
+    });
+}
+
+const chapters = (req, res, next) => {
+    const id = req.params.id;
+    const filter = {
+        where: {
+            story: id
+        }
+    };
+    Chapter.findAll(filter).then(chapters => {
+        req.response.chapters = chapters;
+        return next();
+    });
 }
 
 const create = (req, res, next) => {
@@ -71,7 +85,7 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/story/list', list, send);
-router.get('/api/story/:id', get, scenes, send);
+router.get('/api/story/:id', get, scenes, chapters, send);
 router.post('/api/story', create, send);
 router.put('/api/story/:id', update, send);
 router.delete('/api/story/:id', del, send);

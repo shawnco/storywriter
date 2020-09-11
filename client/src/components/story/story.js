@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {getStory} from './../../actions/story';
 import _ from 'lodash';
 import SceneTable from './../scene/scene_table';
+import ChapterTable from './../chapter/chapter_table';
 
 class Story extends Component {
     constructor(props) {
@@ -24,6 +25,11 @@ class Story extends Component {
             <h2>{_.get(story, 'story.title', '')}</h2>
             <div>{_.get(story, 'story.description', '')}</div>
             <div><Link to={`/preview/${id}`}>Preview</Link></div>
+            <ChapterTable 
+                story={_.get(story, 'story.id')} 
+                chapters={_.get(story, 'chapters', [])}
+                scenes={_.get(story, 'scenes', [])} 
+            />
             <SceneTable story={_.get(story, 'story.id')} scenes={_.get(story, 'scenes', [])} />
         </Fragment>
     }

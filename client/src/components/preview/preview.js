@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {getStory} from './../../actions/story';
 import _ from 'lodash';
-import PreviewScene from './preview_scene';
+import PreviewChapter from './preview_chapter';
 
 class Preview extends Component {
     constructor(props) {
@@ -16,20 +16,23 @@ class Preview extends Component {
         }
     }
 
-    groupScenes(scenes) {
-        const groupedScenes = _.reduce(scenes, (acc, current) => {
-            (acc[current.position] || (acc[current.position] = [])).push(current);
-            return acc;
-        }, [])
-        return groupedScenes;
+    sortChapters(chapters) {
+        return chapters.sort((a, b) => {
+            if (a.position < b.position) {
+                return -1;
+            } else if (a.position > b.position) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
     }
 
     render() {
         const {story} = this.props;
-        const groupedScenes = this.groupScenes(_.get(story, 'scenes', []));
         return <Fragment>
             <h2>{_.get(story, 'story.title', '')}</h2>
-            {groupedScenes.map((scenes, idx) => <PreviewScene key={idx} scenes={scenes} />)}
+            {this.sortChapters(_.get(story, 'chapters', [])).map(chapter => <PreviewChapter key={chapter.id} chapter={chapter} scenes={_.get(story, 'scenes', [])} />)}
         </Fragment>
     }
 }

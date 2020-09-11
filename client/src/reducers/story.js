@@ -12,6 +12,12 @@ import {
     DELETE_SCENE
 } from './../actions/scene';
 
+import {
+    CREATE_CHAPTER,
+    UPDATE_CHAPTER,
+    DELETE_CHAPTER
+} from './../actions/chapter';
+
 const initial = {
     storyList: [],
     story: {}
@@ -59,7 +65,7 @@ export default function(state = initial, action) {
                     ...state,
                     story: {
                         ...state.story,
-                        stories: state.story.scenes.map(scene => {
+                        scenes: state.story.scenes.map(scene => {
                             if (action.payload.id == scene.id) {
                                 return action.payload;
                             } else {
@@ -83,6 +89,52 @@ export default function(state = initial, action) {
             } else {
                 return state;
         }
+
+        case CREATE_CHAPTER:
+            if (action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        chapters: [
+                            ...state.story.chapters,
+                            action.payload
+                        ]
+                    }
+                };
+            } else {
+                return state;
+            }
+        case UPDATE_CHAPTER:
+            if (action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        chapters: state.story.chapters.map(chapter => {
+                            if (action.payload.id == chapter.id) {
+                                return action.payload;
+                            } else {
+                                return chapter;
+                            }
+                        })
+                    }
+                }
+            } else {
+                return state;
+            }
+        case DELETE_CHAPTER:
+            if (action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        chapters: state.story.chapters.filter(chapter => chapter.id !== action.payload.id)
+                    }
+                }
+            } else {
+                return state;
+        }        
 
     }
     return state;

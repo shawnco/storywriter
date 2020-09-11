@@ -1,50 +1,49 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {createScene} from './../../actions/scene';
+import {createChapter} from './../../actions/chapter';
 
-class NewScene extends Component {
+class NewChapter extends Component {
     constructor(props) {
         super(props);
         this.state = {
             description: '',
-            position: '',
-            chapter: ''
+            title: '',
+            position: ''
         }
         this.updateState = this.updateState.bind(this);
-        this.createScene = this.createScene.bind(this);
+        this.createChapter = this.createChapter.bind(this);
     }
 
     updateState(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    createScene() {
-        this.props.createScene({story: this.props.story, ...this.state});
+    createChapter() {
+        this.props.createChapter({story: this.props.story, ...this.state});
         this.setState({
             description: '',
-            position: '',
-            chatper: ''
+            title: '',
+            position: ''
         });
     }
 
     render() {
-        const {description, position, chapter} = this.state;
+        const {title, description, position} = this.state;
         return <tr>
             <td></td>
             <td>
                 <input
                     type='text'
-                    name='description'
-                    value={description}
+                    name='title'
+                    value={title}
                     onChange={this.updateState}
                 />
             </td>
-            <td></td>
             <td>
                 <input
                     type='text'
-                    name='chapter'
-                    value={chapter}
+                    name='description'
+                    value={description}
                     onChange={this.updateState}
                 />
             </td>
@@ -57,11 +56,11 @@ class NewScene extends Component {
                 />
             </td>
             <td>
-                <button onClick={this.createScene}>Create</button>
+                <button onClick={this.createChapter}>Create</button>
             </td>
             <td></td>
         </tr>
     }
 }
 
-export default connect(null, {createScene})(NewScene);
+export default connect(null, {createChapter})(NewChapter);
