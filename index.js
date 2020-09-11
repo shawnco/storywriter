@@ -8,6 +8,8 @@ const Series = require('./server/api/series');
 const Story = require('./server/api/story');
 const Scene = require('./server/api/scene');
 const Chapter = require('./server/api/chapter');
+const Character = require('./server/api/character');
+const Setting = require('./server/api/setting');
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
@@ -17,6 +19,8 @@ app.use(Series);
 app.use(Story);
 app.use(Scene);
 app.use(Chapter);
+app.use(Character);
+app.use(Setting);
 
 app.get('/api/test', (req, res) => {
     res.end('API works');
@@ -27,5 +31,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(process.env.PORT || 5000, () => {
-    console.log('App is now live');
+    console.log('Storywriter is now live');
 });

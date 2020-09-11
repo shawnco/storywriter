@@ -49,6 +49,10 @@ const chapters = (req, res, next) => {
     });
 }
 
+const characters = (req, res, next) => {
+    const id = req.params.id;
+}
+
 const create = (req, res, next) => {
     const data = {
         title: _.get(req, 'body.title', ''),
