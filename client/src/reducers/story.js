@@ -24,6 +24,12 @@ import {
     DELETE_CHARACTER
 } from './../actions/character';
 
+import {
+    CREATE_SETTING,
+    UPDATE_SETTING,
+    DELETE_SETTING
+} from './../actions/setting';
+
 const initial = {
     storyList: [],
     story: {}
@@ -94,7 +100,7 @@ export default function(state = initial, action) {
                 }
             } else {
                 return state;
-        }
+            }
 
         case CREATE_CHAPTER:
             if (action.payload.story == state.story.story.id) {
@@ -139,8 +145,8 @@ export default function(state = initial, action) {
                     }
                 }
             } else {
-                return state;
-        }
+                return state; 
+            }
 
         case CREATE_CHARACTER:
             if (state.story.story && action.payload.story == state.story.story.id) {
@@ -186,7 +192,53 @@ export default function(state = initial, action) {
                 }
             } else {
                 return state;
-        }            
+            }        
+
+        case CREATE_SETTING:
+            if (state.series.series && action.payload.series == state.series.series.id) {
+                return {
+                    ...state,
+                    series: {
+                        ...state.series,
+                        settings: [
+                            ...state.series.settings,
+                            action.payload
+                        ]
+                    }
+                };
+            } else {
+                return state;
+            }
+        case UPDATE_SETTING:
+            if (state.series.series && action.payload.series == state.series.series.id) {
+                return {
+                    ...state,
+                    series: {
+                        ...state.series,
+                        settings: state.series.settings.map(setting => {
+                            if (action.payload.id == setting.id) {
+                                return action.payload;
+                            } else {
+                                return setting;
+                            }
+                        })
+                    }
+                }
+            } else {
+                return state;
+            }
+        case DELETE_SETTING:
+            if (state.series.series && action.payload.series == state.series.series.id) {
+                return {
+                    ...state,
+                    series: {
+                        ...state.series,
+                        settings: state.series.settings.filter(setting => setting.id !== action.payload.id)
+                    }
+                }
+            } else {
+                return state;
+            }   
 
     }
     return state;
