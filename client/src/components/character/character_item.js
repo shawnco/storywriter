@@ -38,7 +38,6 @@ class CharacterItem extends Component {
 
     previewContent(description) {
         ['p', 'li', 'ul'].map(tag => {
-            console.log(tag)
             while (description.indexOf(`<${tag}></${tag}>`) > -1) {
                 description = description.replace(`<${tag}></${tag}>`, '  ');
             }
