@@ -88,7 +88,7 @@ class ChapterItem extends Component {
                     <button onClick={this.deleteChapter}>Delete</button>
                 </td>
             </tr>
-            {this.getChapterScenes(id, scenes).map(scene => <ChapterScene scene={scene} />)}
+            {this.getChapterScenes(id, scenes).map((scene, idx) => <ChapterScene key={idx} scene={scene} />)}
         </Fragment>
     }
 }

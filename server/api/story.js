@@ -1,6 +1,7 @@
 const Story = require('./../models/story');
 const Scene = require('./../models/scene');
 const Chapter = require('./../models/chapter');
+const Character = require('./../models/character');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -49,8 +50,32 @@ const chapters = (req, res, next) => {
     });
 }
 
-const characters = (req, res, next) => {
+const storyCharacters = (req, res, next) => {
     const id = req.params.id;
+    const filter = {
+        where: {
+            story: id
+        }
+    };
+    Character.findAll(filter).then(characters => {
+        req.response.characters = characters;
+        return next();
+    });
+}
+
+const seriesCharacters = (req, res, next) => {
+    const id = req.params.id;
+    Story.findByPk(id).then(story => {
+        const filter = {
+            where: {
+                series: story.series
+            }
+        };
+        Character.findAll(filter).then(characters => {
+            req.response.characters = [...req.response.characters, ...characters];
+            return next();
+        });
+    });
 }
 
 const create = (req, res, next) => {
@@ -89,7 +114,7 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/story/list', list, send);
-router.get('/api/story/:id', get, scenes, chapters, send);
+router.get('/api/story/:id', get, scenes, chapters, storyCharacters, seriesCharacters, send);
 router.post('/api/story', create, send);
 router.put('/api/story/:id', update, send);
 router.delete('/api/story/:id', del, send);

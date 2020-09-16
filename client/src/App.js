@@ -5,6 +5,7 @@ import Series from './components/series/series';
 import Story from './components/story/story';
 import Scene from './components/scene/scene';
 import Preview from './components/preview/preview';
+import Character from './components/character/character';
 
 class App extends Component {
     constructor(props) {
@@ -13,11 +14,13 @@ class App extends Component {
 
     render() {
         return <div className='app' style={{width: '100%'}}>
+            <Route path='/' component={AllSeries} exact />
             <Route path='/series' component={AllSeries} exact />
             <Route path='/series/:id' component={Series} exact />
             <Route path='/story/:id' component={Story} exact />
             <Route path='/scene/:id' component={Scene} exact />
             <Route path='/preview/:id' component={Preview} exact />
+            <Route path='/character/:id' component={Character} exact />
         </div>
     }
 }

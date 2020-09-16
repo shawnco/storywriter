@@ -18,6 +18,12 @@ import {
     DELETE_CHAPTER
 } from './../actions/chapter';
 
+import {
+    CREATE_CHARACTER,
+    UPDATE_CHARACTER,
+    DELETE_CHARACTER
+} from './../actions/character';
+
 const initial = {
     storyList: [],
     story: {}
@@ -134,7 +140,53 @@ export default function(state = initial, action) {
                 }
             } else {
                 return state;
-        }        
+        }
+
+        case CREATE_CHARACTER:
+            if (state.story.story && action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        characters: [
+                            ...state.story.characters,
+                            action.payload
+                        ]
+                    }
+                };
+            } else {
+                return state;
+            }
+        case UPDATE_CHARACTER:
+            if (state.story.story && action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        characters: state.story.characters.map(character => {
+                            if (action.payload.id == character.id) {
+                                return action.payload;
+                            } else {
+                                return character;
+                            }
+                        })
+                    }
+                }
+            } else {
+                return state;
+            }
+        case DELETE_CHARACTER:
+            if (state.story.story && action.payload.story == state.story.story.id) {
+                return {
+                    ...state,
+                    story: {
+                        ...state.story,
+                        characters: state.story.characters.filter(character => character.id !== action.payload.id)
+                    }
+                }
+            } else {
+                return state;
+        }            
 
     }
     return state;

@@ -21,7 +21,7 @@ const get = (req, res, next) => {
 
 const create = (req, res, next) => {
     const data = {
-        name: _.get(req, 'body.title', ''),
+        name: _.get(req, 'body.name', ''),
         description: _.get(req, 'body.description', ''),
         story: _.get(req, 'body.story', ''),
         series: _.get(req, 'body.series', '')
