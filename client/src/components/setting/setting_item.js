@@ -1,37 +1,37 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {updateCharacter, deleteCharacter} from './../../actions/character';
+import {updateSetting, deleteSetting} from './../../actions/setting';
 import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
-class CharacterItem extends Component {
+class SettingItem extends Component {
     constructor(props) {
         super(props);
-        const {character} = this.props;
+        const {setting} = this.props;
         this.state = {
-            id: character.id,
-            description: character.description,
-            name: character.name,
-            story: character.story,
-            series: character.series
+            id: setting.id,
+            description: setting.description,
+            name: setting.name,
+            story: setting.story,
+            series: setting.series
         };
         this.updateState = this.updateState.bind(this);
-        this.updateCharacter = this.updateCharacter.bind(this);
-        this.deleteCharacter = this.deleteCharacter.bind(this);
+        this.updateSetting = this.updateSetting.bind(this);
+        this.deleteSetting = this.deleteSetting.bind(this);
     }
 
     updateState(e) {
         this.setState({[e.target.name]:  e.target.value});
     }
 
-    updateCharacter() {
+    updateSetting() {
         const {id, ...rest} = this.state;
-        this.props.updateCharacter(id, rest);
+        this.props.updateSetting(id, rest);
     }
 
-    deleteCharacter() {
-        if (window.confirm('Are you sure you want to delete the character?')) {
-            this.props.deleteCharacter(this.state.id);
+    deleteSetting() {
+        if (window.confirm('Are you sure you want to delete the setting?')) {
+            this.props.deleteSetting(this.state.id);
         } else {
             return false;
         }
@@ -56,7 +56,7 @@ class CharacterItem extends Component {
         const {id, description, name} = this.state;
         return <TableRow>
             <TableCell>
-                <Link to={`/character/${id}`}>{id}</Link>
+                <Link to={`/setting/${id}`}>{id}</Link>
             </TableCell>
             <TableCell>
                 <Input
@@ -70,16 +70,16 @@ class CharacterItem extends Component {
                 {this.previewContent(description)}
             </TableCell>
             <TableCell>
-                <Button variant='contained' color='primary' onClick={this.updateCharacter}>Update</Button>
+                <Button variant='contained' color='primary' onClick={this.updateSetting}>Update</Button>
             </TableCell>
             <TableCell>
-                <Button variant='contained' color='secondary' onClick={this.deleteCharacter}>Delete</Button>
+                <Button variant='contained' color='primary' onClick={this.deleteSetting}>Delete</Button>
             </TableCell>
         </TableRow>
     }
 }
 
 export default connect(null, {
-    updateCharacter,
-    deleteCharacter
-})(CharacterItem);
+    updateSetting,
+    deleteSetting
+})(SettingItem);

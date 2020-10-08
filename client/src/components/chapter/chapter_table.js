@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import ChapterItem from './chapter_item';
 import NewChapter from './new_chapter';
+import {Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
 
 class ChapterTable extends Component {
     constructor(props) {
@@ -23,22 +24,22 @@ class ChapterTable extends Component {
         const {chapters, scenes, story} = this.props;
         return <Fragment>
             <h2>Chapter List</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Position</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table border={1}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Title</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Position</TableCell>
+                        <TableCell>Update</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {this.sortChapters(chapters).map(s => <ChapterItem key={s.id} chapter={s} scenes={scenes} />)}
                     <NewChapter story={story} />
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </Fragment>
     }
 }

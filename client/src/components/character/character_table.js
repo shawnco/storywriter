@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import CharacterItem from './character_item';
 import NewCharacter from './new_character';
+import {Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
 
 class CharacterTable extends Component {
     constructor(props) {
@@ -23,21 +24,21 @@ class CharacterTable extends Component {
         const {characters, story, series} = this.props;
         return <Fragment>
             <h2>Character List</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description (preview)</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table border={1}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Description (preview)</TableCell>
+                        <TableCell>Update</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {this.sortCharacters(characters).map(s => <CharacterItem key={s.id} character={s} />)}
                     <NewCharacter story={story} series={series} />
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </Fragment>
     }
 }

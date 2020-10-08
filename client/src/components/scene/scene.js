@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {updateScene} from './../../actions/scene';
 import {Editor} from 'primereact/editor';
 import _ from 'lodash';
+import {Button, Input} from '@material-ui/core';
 
 class Scene extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class Scene extends Component {
                 value={content}
                 onTextChange={this.updateContent}
             />
-            <button onClick={this.saveContent}>Save</button>
+            <Button variant='contained' color='primary' onClick={this.saveContent}>Save</Button>
         </Fragment>
     }
 }

@@ -1,11 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {updateCharacter} from './../../actions/character';
+import {updateSetting} from './../../actions/setting';
 import {Editor} from 'primereact/editor';
 import _ from 'lodash';
-import {Button, Input} from '@material-ui/core';
 
-class Character extends Component {
+class Setting extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,16 +19,16 @@ class Character extends Component {
     }
 
     componentDidMount() {
-        const characters = _.get(this.props, 'story.characters', []);
-        const character = _.find(characters, c => c.id == this.state.id);
-        if (character) {
-            this.setState({ ...character });
+        const settings = _.get(this.props, 'story.settings', []);
+        const setting = _.find(settings, c => c.id == this.state.id);
+        if (setting) {
+            this.setState({ ...setting });
         }
     }
 
     saveContent(e) {
         const {id, ...rest} = this.state;
-        this.props.updateCharacter(id, rest);
+        this.props.updateSetting(id, rest);
     }
 
     updateContent(e) {
@@ -39,8 +38,8 @@ class Character extends Component {
     render() {
         const {description, name} = this.state;
         return <Fragment>
-            <h2>Editing Character</h2>
-            <strong>Name:</strong> <Input
+            <h2>Editing Setting</h2>
+            <strong>Name:</strong> <input
                 type='text'
                 name='name'
                 value={name}
@@ -51,7 +50,7 @@ class Character extends Component {
                 value={description}
                 onTextChange={this.updateContent}
             />
-            <Button variant='contained' color='primary' onClick={this.saveContent}>Save</Button>
+            <button onClick={this.saveContent}>Save</button>
         </Fragment>
     }
 }
@@ -62,4 +61,4 @@ const mapStateToProps = ({story}) => {
     };
 }
 
-export default connect(mapStateToProps, {updateCharacter})(Character);
+export default connect(mapStateToProps, {updateSetting})(Setting);

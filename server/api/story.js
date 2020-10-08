@@ -78,6 +78,34 @@ const seriesCharacters = (req, res, next) => {
     });
 }
 
+const storySettings = (req, res, next) => {
+    const id = req.params.id;
+    const filter = {
+        where: {
+            story: id
+        }
+    };
+    Setting.findAll(filter).then(settings => {
+        req.response.settings = settings;
+        return next();
+    });
+}
+
+const seriesSettings = (req, res, next) => {
+    const id = req.params.id;
+    Story.findByPk(id).then(story => {
+        const filter = {
+            where: {
+                series: story.series
+            }
+        };
+        Setting.findAll(filter).then(settings => {
+            req.response.settings = [...req.response.settings, ...settings];
+            return next();
+        });
+    });
+}
+
 const create = (req, res, next) => {
     const data = {
         title: _.get(req, 'body.title', ''),
@@ -114,7 +142,7 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/story/list', list, send);
-router.get('/api/story/:id', get, scenes, chapters, storyCharacters, seriesCharacters, send);
+router.get('/api/story/:id', get, scenes, chapters, storyCharacters, seriesCharacters, storySettings, seriesSettings, send);
 router.post('/api/story', create, send);
 router.put('/api/story/:id', update, send);
 router.delete('/api/story/:id', del, send);

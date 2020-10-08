@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import SceneItem from './scene_item';
 import NewScene from './new_scene';
+import {Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
 
 class SceneTable extends Component {
     constructor(props) {
@@ -23,23 +24,23 @@ class SceneTable extends Component {
         const {scenes, story} = this.props;
         return <Fragment>
             <h2>Scene List</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Description</th>
-                        <th>Content (preview)</th>
-                        <th>Chapter</th>
-                        <th>Position</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table border={1}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Content (preview)</TableCell>
+                        <TableCell>Chapter</TableCell>
+                        <TableCell>Position</TableCell>
+                        <TableCell>Update</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {this.sortScenes(scenes).map(s => <SceneItem key={s.id} scene={s} />)}
                     <NewScene story={story} />
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </Fragment>
     }
 }

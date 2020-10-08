@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {createScene} from './../../actions/scene';
+import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
 class NewScene extends Component {
     constructor(props) {
@@ -29,38 +30,38 @@ class NewScene extends Component {
 
     render() {
         const {description, position, chapter} = this.state;
-        return <tr>
-            <td></td>
-            <td>
-                <input
+        return <TableRow>
+            <TableCell></TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='description'
                     value={description}
                     onChange={this.updateState}
                 />
-            </td>
-            <td></td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='chapter'
                     value={chapter}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='position'
                     value={position}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <button onClick={this.createScene}>Create</button>
-            </td>
-            <td></td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.createScene}>Create</Button>
+            </TableCell>
+            <TableCell></TableCell>
+        </TableRow>
     }
 }
 

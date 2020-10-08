@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {updateStory, deleteStory} from './../../actions/story';
+import {TableRow, TableCell, Button, Input, TextField} from '@material-ui/core';
 
 class StoryItem extends Component {
     constructor(props) {
@@ -36,32 +37,33 @@ class StoryItem extends Component {
 
     render() {
         const {id, title, description} = this.state;
-        return <tr>
-            <td>
+        return <TableRow>
+            <TableCell>
                 <Link to={`/story/${id}`}>{id}</Link>
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='title'
                     value={title}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <textarea
+            </TableCell>
+            <TableCell>
+                <TextField
+                    multiline
                     name='description'
                     value={description}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <button onClick={this.updateStory}>Update</button>
-            </td>
-            <td>
-                <button onClick={this.deleteStory}>Delete</button>
-            </td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.updateStory}>Update</Button>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='secondary' onClick={this.deleteStory}>Delete</Button>
+            </TableCell>
+        </TableRow>
     }
 }
 

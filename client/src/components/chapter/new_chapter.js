@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {createChapter} from './../../actions/chapter';
+import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
 class NewChapter extends Component {
     constructor(props) {
@@ -29,37 +30,37 @@ class NewChapter extends Component {
 
     render() {
         const {title, description, position} = this.state;
-        return <tr>
-            <td></td>
-            <td>
-                <input
+        return <TableRow>
+            <TableCell></TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='title'
                     value={title}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='description'
                     value={description}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='position'
                     value={position}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <button onClick={this.createChapter}>Create</button>
-            </td>
-            <td></td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.createChapter}>Create</Button>
+            </TableCell>
+            <TableCell></TableCell>
+        </TableRow>
     }
 }
 

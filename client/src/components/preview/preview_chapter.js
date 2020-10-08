@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import PreviewScene from './preview_scene';
+import {Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
 
 class PreviewChapter extends Component {
     constructor(props) {

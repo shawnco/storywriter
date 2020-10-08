@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {createCharacter} from './../../actions/character';
+import {createSetting} from './../../actions/setting';
 import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
-class NewCharacter extends Component {
+class NewSetting extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,16 +11,16 @@ class NewCharacter extends Component {
             description: ''
         }
         this.updateState = this.updateState.bind(this);
-        this.createCharacter = this.createCharacter.bind(this);
+        this.createSetting = this.createSetting.bind(this);
     }
 
     updateState(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    createCharacter() {
+    createSetting() {
         const {story, series} = this.props;
-        this.props.createCharacter({story, series, ...this.state});
+        this.props.createSetting({story, series, ...this.state});
         this.setState({
             name: '',
             description: ''
@@ -41,11 +41,11 @@ class NewCharacter extends Component {
             </TableCell>
             <TableCell></TableCell>
             <TableCell>
-                <Button variant='contained' color='primary' onClick={this.createCharacter}>Create</Button>
+                <Button variant='contained' color='primary' onClick={this.createSetting}>Create</Button>
             </TableCell>
             <TableCell></TableCell>
         </TableRow>
     }
 }
 
-export default connect(null, {createCharacter})(NewCharacter);
+export default connect(null, {createSetting})(NewSetting);

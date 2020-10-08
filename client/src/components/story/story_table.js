@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import StoryItem from './story_item';
 import NewStory from './new_story';
+import {Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
 
 class StoryTable extends Component {
     constructor(props) {
@@ -11,21 +12,21 @@ class StoryTable extends Component {
         const {stories, series} = this.props;
         return <Fragment>
             <h2>Story List</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table border={1}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>ID</TableCell>
+                        <TableCell>Title</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Update</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {stories.map(s => <StoryItem key={s.id} story={s} />)}
                     <NewStory series={series} />
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </Fragment>
     }
 }

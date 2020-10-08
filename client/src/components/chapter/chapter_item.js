@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {updateChapter, deleteChapter} from './../../actions/chapter';
 import ChapterScene from './chapter_scene';
+import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
 class ChapterItem extends Component {
     constructor(props) {
@@ -53,41 +54,41 @@ class ChapterItem extends Component {
         const {id, description, title, position} = this.state;
         const {scenes} = this.props;
         return <Fragment>
-            <tr>
-                <td>
+            <TableRow>
+                <TableCell>
                     {id}
-                </td>
-                <td>
-                    <input
+                </TableCell>
+                <TableCell>
+                    <Input
                         type='text'
                         name='title'
                         value={title}
                         onChange={this.updateState}
                     />
-                </td>
-                <td>
-                    <input
+                </TableCell>
+                <TableCell>
+                    <Input
                         type='text'
                         name='description'
                         value={description}
                         onChange={this.updateState}
                     />
-                </td>
-                <td>
-                    <input
+                </TableCell>
+                <TableCell>
+                    <Input
                         type='text'
                         name='position'
                         value={position}
                         onChange={this.updateState}
                     />
-                </td>
-                <td>
-                    <button onClick={this.updateChapter}>Update</button>
-                </td>
-                <td>
-                    <button onClick={this.deleteChapter}>Delete</button>
-                </td>
-            </tr>
+                </TableCell>
+                <TableCell>
+                    <Button variant='contained' color='primary' onClick={this.updateChapter}>Update</Button>
+                </TableCell>
+                <TableCell>
+                    <Button variant='contained' color='primary' onClick={this.deleteChapter}>Delete</Button>
+                </TableCell>
+            </TableRow>
             {this.getChapterScenes(id, scenes).map((scene, idx) => <ChapterScene key={idx} scene={scene} />)}
         </Fragment>
     }

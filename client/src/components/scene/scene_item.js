@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {updateScene, deleteScene} from './../../actions/scene';
+import {TableRow, TableCell, Button, Input} from '@material-ui/core';
 
 class SceneItem extends Component {
     constructor(props) {
@@ -52,44 +53,44 @@ class SceneItem extends Component {
 
     render() {
         const {id, description, content, position, chapter} = this.state;
-        return <tr>
-            <td>
+        return <TableRow>
+            <TableCell>
                 <Link to={`/scene/${id}`}>{id}</Link>
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='description'
                     value={description}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 {this.previewContent(content)}
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='chapter'
                     value={chapter}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <input
+            </TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='position'
                     value={position}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <button onClick={this.updateScene}>Update</button>
-            </td>
-            <td>
-                <button onClick={this.deleteScene}>Delete</button>
-            </td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.updateScene}>Update</Button>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.deleteScene}>Delete</Button>
+            </TableCell>
+        </TableRow>
     }
 }
 

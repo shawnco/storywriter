@@ -4,6 +4,7 @@ import {getSeries} from './../../actions/series';
 import _ from 'lodash';
 import StoryTable from './../story/story_table';
 import CharacterTable from './../character/character_table';
+import SettingTable from './../setting/setting_table';
 
 class Series extends Component {
     constructor(props) {
@@ -22,11 +23,13 @@ class Series extends Component {
         const id = _.get(series, 'series.id', '');
         const stories = _.get(series, 'stories', []);
         const characters = _.get(series, 'characters', []);
+        const settings = _.get(series, 'settings', []);
         return <Fragment>
             <h2>{_.get(series, 'series.title', '')}</h2>
             <div>{_.get(series, 'series.description', '')}</div>
             <StoryTable series={id} stories={stories} />
             <CharacterTable series={id} characters={characters} />
+            <SettingTable series={id} settings={settings} />
         </Fragment>
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {createStory} from './../../actions/story';
+import {TableRow, TableCell, Button, Input, TextField} from '@material-ui/core';
 
 class NewStory extends Component {
     constructor(props) {
@@ -27,28 +28,29 @@ class NewStory extends Component {
 
     render() {
         const {title, description} = this.state;
-        return <tr>
-            <td></td>
-            <td>
-                <input
+        return <TableRow>
+            <TableCell></TableCell>
+            <TableCell>
+                <Input
                     type='text'
                     name='title'
                     value={title}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <textarea
+            </TableCell>
+            <TableCell>
+                <TextField
+                    multiline
                     name='description'
                     value={description}
                     onChange={this.updateState}
                 />
-            </td>
-            <td>
-                <button onClick={this.createStory}>Create</button>
-            </td>
-            <td></td>
-        </tr>
+            </TableCell>
+            <TableCell>
+                <Button variant='contained' color='primary' onClick={this.createStory}>Create</Button>
+            </TableCell>
+            <TableCell></TableCell>
+        </TableRow>
     }
 }
 

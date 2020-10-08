@@ -6,6 +6,7 @@ import _ from 'lodash';
 import SceneTable from './../scene/scene_table';
 import ChapterTable from './../chapter/chapter_table';
 import CharacterTable from './../character/character_table';
+import SettingTable from './../setting/setting_table';
 
 class Story extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class Story extends Component {
         const id = _.get(story, 'story.id', '');
         const scenes = _.get(story, 'scenes', [])
         const characters = _.get(story, 'characters', []);
+        const settings = _.get(story, 'settings', []);
         return <Fragment>
             <h2>{_.get(story, 'story.title', '')}</h2>
             <div>{_.get(story, 'story.description', '')}</div>
@@ -35,6 +37,7 @@ class Story extends Component {
             />
             <SceneTable story={id} scenes={scenes} />
             <CharacterTable story={id} characters={characters} />
+            <SettingTable story={id} settings={settings} />
         </Fragment>
     }
 }

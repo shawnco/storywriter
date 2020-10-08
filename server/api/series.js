@@ -1,6 +1,7 @@
 const Series = require('./../models/series');
 const Story = require('./../models/story');
 const Character = require('./../models/character');
+const Setting = require('./../models/setting');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -70,6 +71,40 @@ const storyCharacters = (req, res, next) => {
     });
 }
 
+const seriesSettings = (req, res, next) => {
+    const id = req.params.id;
+    const filter = {
+        where: {
+            series: id
+        }
+    };
+    Setting.findAll(filter).then(settings => {
+        req.response.settings = settings;
+        return next();
+    });
+}
+
+const storySettings = (req, res, next) => {
+    const id = req.params.id;
+    const filter = {
+        where: {
+            series: id
+        }
+    };
+    Story.findAll(filter).then(stories => {
+        const ids = stories.map(s => s.id);
+        const filter2 = {
+            where: {
+                story: ids
+            }
+        };
+        Setting.findAll(filter2).then(settings => {
+            req.response.settings = [...req.response.settings, ...settings];
+            return next();
+        });
+    });
+}
+
 const create = (req, res, next) => {
     const data = {
         title: _.get(req, 'body.title', ''),
@@ -104,7 +139,7 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/series/list', list, send);
-router.get('/api/series/:id', get, stories, seriesCharacters, storyCharacters, send);
+router.get('/api/series/:id', get, stories, seriesCharacters, storyCharacters, seriesSettings, storySettings, send);
 router.post('/api/series', create, send);
 router.put('/api/series/:id', update, send);
 router.delete('/api/series/:id', del, send);

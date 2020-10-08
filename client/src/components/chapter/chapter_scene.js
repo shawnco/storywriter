@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import {TableRow, TableCell} from '@material-ui/core';
 
 class ChapterScene extends Component {
     constructor(props) {
@@ -22,11 +23,11 @@ class ChapterScene extends Component {
 
     render() {
         const {scene} = this.props;
-        return <tr>
-            <td></td>
-            <td colSpan={2}>{scene.description}</td>
-            <td colspan={2} dangerouslySetInnerHTML={{__html: this.previewContent(scene.content)}} />
-        </tr>
+        return <TableRow>
+            <TableCell></TableCell>
+            <TableCell colSpan={2}>{scene.description}</TableCell>
+            <TableCell colspan={2} dangerouslySetInnerHTML={{__html: this.previewContent(scene.content)}} />
+        </TableRow>
     }
 }
 
