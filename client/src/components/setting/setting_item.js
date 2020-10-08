@@ -73,7 +73,7 @@ class SettingItem extends Component {
                 <Button variant='contained' color='primary' onClick={this.updateSetting}>Update</Button>
             </TableCell>
             <TableCell>
-                <Button variant='contained' color='primary' onClick={this.deleteSetting}>Delete</Button>
+                <Button variant='contained' color='secondary' onClick={this.deleteSetting}>Delete</Button>
             </TableCell>
         </TableRow>
     }
