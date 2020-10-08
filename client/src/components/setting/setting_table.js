@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import SettingItem from './setting_item';
 import NewSetting from './new_setting';
+import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';
 
 class SettingTable extends Component {
     constructor(props) {
@@ -23,21 +24,21 @@ class SettingTable extends Component {
         const {settings, story, series} = this.props;
         return <Fragment>
             <h2>Setting List</h2>
-            <table border={1}>
-                <thead>
-                    <tr>
+            <Table border={1}>
+                <TableHead>
+                    <TableRow>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description (preview)</th>
                         <th>Update</th>
                         <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {this.sortSettings(settings).map(s => <SettingItem key={s.id} setting={s} />)}
                     <NewSetting story={story} series={series} />
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
         </Fragment>
     }
 }
