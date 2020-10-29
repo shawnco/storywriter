@@ -17,6 +17,17 @@ export function getAllStory() {
     }
 }
 
+export function getStoriesBySeries(id) {
+    return dispatch => {
+        Request.get(`series/${id}/stories`).then(res => {
+            dispatch({
+                type: GET_ALL_STORY,
+                payload: res.data
+            });
+        });
+    }
+}
+
 export function getStory(id) {
     return dispatch => {
         Request.get(`story/${id}`).then(res => {

@@ -17,6 +17,28 @@ export function getAllChapter() {
     }
 }
 
+export function getChaptersBySeries(id) {
+    return dispatch => {
+        Request.get(`series/${id}/chapters`).then(res => {
+            dispatch({
+                type: GET_ALL_CHAPTER,
+                payload: res.data
+            });
+        });
+    }
+}
+
+export function getChaptersByStory(id) {
+    return dispatch => {
+        Request.get(`story/${id}/chapters`).then(res => {
+            dispatch({
+                type: GET_ALL_CHAPTER,
+                payload: res.data
+            });
+        });
+    }
+}
+
 export function getChapter(id) {
     return dispatch => {
         Request.get(`chapter/${id}`).then(res => {

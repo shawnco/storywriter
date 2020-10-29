@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {getStory} from './../../actions/story';
+import {getChaptersByStory} from './../../actions/chapter';
 import _ from 'lodash';
 import PreviewChapter from './preview_chapter';
 
@@ -13,6 +14,9 @@ class Preview extends Component {
         const id = _.get(this.props, 'match.params.id', '');
         if (id) {
             this.props.getStory(id);
+            if (!this.props.chapter) {
+                this.props.getChaptersByStory(id);
+            }
         }
     }
 
@@ -29,17 +33,18 @@ class Preview extends Component {
     }
 
     render() {
-        const {story} = this.props;
+        const {story, chapters} = this.props;
         return <Fragment>
-            <h2>{_.get(story, 'story.title', '')}</h2>
-            {this.sortChapters(_.get(story, 'chapters', [])).map(chapter => <PreviewChapter key={chapter.id} chapter={chapter} scenes={_.get(story, 'scenes', [])} />)}
+            <h2>{_.get(story, '.title', '')}</h2>
+            {this.sortChapters(chapters).map(chapter => <PreviewChapter key={chapter.id} chapter={chapter} scenes={_.get(story, 'scenes', [])} />)}
         </Fragment>
     }
 }
 
-const mapStateToProps = ({story}) => {
+const mapStateToProps = ({story, chapter}) => {
     return {
-        story: story.story
+        story: story.story,
+        chapters: chapter.chapterList
     };
 }
 

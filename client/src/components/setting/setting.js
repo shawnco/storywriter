@@ -19,10 +19,9 @@ class Setting extends Component {
     }
 
     componentDidMount() {
-        const settings = _.get(this.props, 'story.settings', []);
-        const setting = _.find(settings, c => c.id == this.state.id);
+        const setting = _.find(settings, s => s.id == this.state.id);
         if (setting) {
-            this.setState({ ...setting });
+            this.setState({...setting});
         }
     }
 
@@ -55,9 +54,9 @@ class Setting extends Component {
     }
 }
 
-const mapStateToProps = ({story}) => {
+const mapStateToProps = ({setting}) => {
     return {
-        story: story.story
+        settings: setting.settings
     };
 }
 

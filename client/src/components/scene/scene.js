@@ -20,7 +20,7 @@ class Scene extends Component {
     }
 
     componentDidMount() {
-        const scenes = _.get(this.props, 'story.scenes', []);
+        const scenes = _.get(this.props, 'scenes', []);
         const scene = _.find(scenes, s => s.id == this.state.id);
         if (scene) {
             this.setState({ ...scene });
@@ -50,9 +50,10 @@ class Scene extends Component {
     }
 }
 
-const mapStateToProps = ({story}) => {
+const mapStateToProps = ({story, scene}) => {
     return {
-        story: story.story
+        story: story.story,
+        scenes: scene.sceneList
     };
 }
 

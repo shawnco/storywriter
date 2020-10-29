@@ -20,10 +20,9 @@ class Character extends Component {
     }
 
     componentDidMount() {
-        const characters = _.get(this.props, 'story.characters', []);
-        const character = _.find(characters, c => c.id == this.state.id);
+        const character = _.find(this.props.characters, c => c.id == this.state.id);
         if (character) {
-            this.setState({ ...character });
+            this.setState({...character})
         }
     }
 
@@ -37,6 +36,7 @@ class Character extends Component {
     }
 
     render() {
+        console.log(this.state)
         const {description, name} = this.state;
         return <Fragment>
             <h2>Editing Character</h2>
@@ -56,9 +56,9 @@ class Character extends Component {
     }
 }
 
-const mapStateToProps = ({story}) => {
+const mapStateToProps = ({character}) => {
     return {
-        story: story.story
+        characters: character.characters
     };
 }
 

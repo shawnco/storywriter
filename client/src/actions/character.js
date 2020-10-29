@@ -1,4 +1,5 @@
 import Request from './../request';
+import { GET_ALL_CHAPTER } from './chapter';
 
 export const GET_ALL_CHARACTER = 'get_all_character';
 export const GET_CHARACTER = 'get_character';
@@ -9,6 +10,28 @@ export const DELETE_CHARACTER = 'delete_character';
 export function getAllCharacter() {
     return dispatch => {
         Request.get('character/list').then(res => {
+            dispatch({
+                type: GET_ALL_CHARACTER,
+                payload: res.data
+            });
+        });
+    }
+}
+
+export function getCharactersBySeries(id) {
+    return dispatch => {
+        Request.get(`series/${id}/characters`).then(res => {
+            dispatch({
+                type: GET_ALL_CHARACTER,
+                payload: res.data
+            });
+        });
+    }
+}
+
+export function getCharactersByStory(id) {
+    return dispatch => {
+        Request.get(`story/${id}/characters`).then(res => {
             dispatch({
                 type: GET_ALL_CHARACTER,
                 payload: res.data

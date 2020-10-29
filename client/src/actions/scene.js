@@ -17,6 +17,28 @@ export function getAllScene() {
     }
 }
 
+export function getScenesBySeries(id) {
+    return dispatch => {
+        Request.get(`series/${id}/scenes`).then(res => {
+            dispatch({
+                type: GET_ALL_SCENE,
+                payload: res.data
+            });
+        });
+    }
+}
+
+export function getScenesByStory(id) {
+    return dispatch => {
+        Request.get(`story/${id}/scenes`).then(res => {
+            dispatch({
+                type: GET_ALL_SCENE,
+                payload: res.data
+            });
+        });
+    }
+}
+
 export function getScene(id) {
     return dispatch => {
         Request.get(`scene/${id}`).then(res => {

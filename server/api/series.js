@@ -32,7 +32,7 @@ const stories = (req, res, next) => {
         }
     };
     Story.findAll(filter).then(stories => {
-        req.response.stories = stories;
+        req.response = stories;
         return next();
     });
 }
@@ -45,7 +45,7 @@ const seriesCharacters = (req, res, next) => {
         }
     };
     Character.findAll(filter).then(characters => {
-        req.response.characters = characters;
+        req.response = characters;
         return next();
     });
 }
@@ -65,7 +65,7 @@ const storyCharacters = (req, res, next) => {
             }
         };
         Character.findAll(filter2).then(characters => {
-            req.response.characters = [...req.response.characters, ...characters];
+            req.response = [...req.response, ...characters];
             return next();
         });
     });
@@ -79,7 +79,7 @@ const seriesSettings = (req, res, next) => {
         }
     };
     Setting.findAll(filter).then(settings => {
-        req.response.settings = settings;
+        req.response = settings;
         return next();
     });
 }
@@ -99,7 +99,7 @@ const storySettings = (req, res, next) => {
             }
         };
         Setting.findAll(filter2).then(settings => {
-            req.response.settings = [...req.response.settings, ...settings];
+            req.response = [...req.response, ...settings];
             return next();
         });
     });
@@ -139,7 +139,10 @@ const del = (req, res, next) => {
 }
 
 router.get('/api/series/list', list, send);
-router.get('/api/series/:id', get, stories, seriesCharacters, storyCharacters, seriesSettings, storySettings, send);
+router.get('/api/series/:id/stories', stories, send);
+router.get('/api/series/:id/characters', seriesCharacters, storyCharacters, send);
+router.get('/api/series/:id/settings', seriesSettings, storySettings, send);
+router.get('/api/series/:id', get, send);
 router.post('/api/series', create, send);
 router.put('/api/series/:id', update, send);
 router.delete('/api/series/:id', del, send);
